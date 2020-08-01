@@ -9,7 +9,7 @@ io.on('connection', (socket) => {
     console.log('socket Opened');
 
     socket.on('client_new_msg',(data)=>{
-        console.log('New Message (for same Room)',data)
+        console.log('New Message arrived(for same Room)',data)
         socket.join(data.room);
         socket.in(data.room).broadcast.emit("server_new_message", {
           msg: data.msg ,
@@ -19,7 +19,7 @@ io.on('connection', (socket) => {
     })
 
     socket.on('new_joinee',(data)=>{
-    console.log('The message form client (when new user join)',data)
+    console.log('The message form client (when new-user join)',data)
      socket.join(data.room);
      socket.in(data.room).broadcast.emit('server_new_joinee',{
          msg: data.user + ' succesfully joined room '+data.room,
