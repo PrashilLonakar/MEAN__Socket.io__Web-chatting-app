@@ -11,7 +11,7 @@ export class AppComponent implements OnInit {
   user: string = '';
   date = new Date();
   msgList: any[] = [];
-  msg: string;
+  message: string;
   constructor(private socketcommService: Socketcomm) {}
   ngOnInit() {
     this.socketcommService.serverNewMessage().subscribe(
@@ -41,21 +41,21 @@ export class AppComponent implements OnInit {
     this.socketcommService.joinRoom(this.user, this.selectedRoom);
   }
 
-  sendMessage(){
+  sendMessage() {
     console.log('Inside the send message');
     this.socketcommService.sendMessageClient(
       this.user,
-      this.msg,
+      this.message,
       this.selectedRoom
     );
     const data = {
       user: this.user,
-      msg: this.msg ,
+      msg: this.message,
       date: this.date,
-    }
+    };
     this.msgList.push(data);
-     console.log('MSG when sendMessage', this.msgList);
-     this.msg = '';
+    console.log('MSG when sendMessage', this.msgList);
+    this.message = '';
   }
   title = 'chat-client';
 }
